@@ -7,7 +7,7 @@ ActivationWindow.__index = ActivationWindow
 
 function ActivationWindow.new()
     local self = setmetatable({
-        namespace = vim.api.nvim_create_namespace("activate_neovim"),
+        namespace = vim.api.nvim_create_namespace("neo-needs-key"),
         buffer_id = 0,
         window_id = 0,
     }, ActivationWindow)
