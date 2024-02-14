@@ -1,5 +1,9 @@
 # NeoNeedsKey: Yo Ho Ho, Activate Your Vim or Walk the Plank!
 
+![lua.png](./images/lua.png)
+
+![lua.png](./images/go.png)
+
 Ahoy, mateys! Sailin' the open-source seas without a license? NeoNeedsKey gently
 reminds you (with a touch of pirate humor) that even digital heroes gotta support the
 devs!
