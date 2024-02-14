@@ -15,6 +15,11 @@ function ActivationWindow.new()
     return self
 end
 
+function ActivationWindow:resize()
+    self:close()
+    self:open()
+end
+
 local function create_window_config()
     local ui = vim.api.nvim_list_uis()[1]
     local col = 12
@@ -76,6 +81,12 @@ return {
             }
         end
 
+        vim.api.nvim_create_autocmd("WinResized", {
+            group = vim.api.nvim_create_augroup("NeoNeedsKey", { clear = true }),
+            callback = function()
+                window:resize()
+            end,
+        })
         vim.api.nvim_create_user_command("ActivateNeovim", function() window:close() end, {})
         vim.api.nvim_create_user_command("DeactivateNeovim", function() window:open() end, {})
         vim.defer_fn(function() window:open() end, opts.timeout * 1000)
