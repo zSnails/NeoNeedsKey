@@ -1,5 +1,5 @@
 ---@class ActivationWindow
----@field buffer integer
+---@field buffer_id integer
 ---@field window_id integer
 ---@field namespace integer
 local ActivationWindow = {}
@@ -8,16 +8,18 @@ ActivationWindow.__index = ActivationWindow
 function ActivationWindow.new()
     local self = setmetatable({
         namespace = vim.api.nvim_create_namespace("neo-needs-key"),
-        buffer_id = 0,
-        window_id = 0,
+        buffer_id = nil,
+        window_id = nil,
     }, ActivationWindow)
 
     return self
 end
 
 function ActivationWindow:resize()
-    self:close()
-    self:open()
+    if self.buffer_id ~= nil and self.window_id ~= nil then
+        self:close()
+        self:open()
+    end
 end
 
 local function create_window_config()
@@ -34,7 +36,7 @@ local function create_window_config()
         anchor = "SW",
         col = col,
         row = row,
-        width = 36,
+        width = 35,
         height = 2,
         border = "none",
         style = "minimal",
@@ -55,19 +57,30 @@ local function create_window()
 end
 
 function ActivationWindow:close()
-    vim.api.nvim_win_close(self.window_id, true)
+    if self.window_id ~= nil then
+        vim.api.nvim_win_close(self.window_id, true)
+    end
+
+    if self.buffer_id ~= nil then
+        vim.api.nvim_buf_delete(self.buffer_id, { force = true })
+    end
+    self.window_id = nil
+    self.buffer_id = nil
 end
 
 function ActivationWindow:open()
-    self.buffer, self.window_id = create_window()
-    vim.api.nvim_set_hl(self.namespace, "NormalFloat", { bg = "NONE" })
-    vim.api.nvim_win_set_hl_ns(self.window_id, self.namespace)
-    vim.api.nvim_buf_set_extmark(self.buffer, self.namespace, 0, 0, {
-        virt_text = { { "Activate Neovim.", "Comment" } },
-        virt_lines = {
-            { { " Go to settings to activate neovim.", "Comment" } },
-        },
-    })
+    if self.window_id == nil and self.buffer_id == nil then
+        self.buffer_id, self.window_id = create_window()
+        vim.api.nvim_set_hl(self.namespace, "NormalFloat", { bg = "NONE" })
+        vim.api.nvim_win_set_hl_ns(self.window_id, self.namespace)
+        vim.api.nvim_buf_set_extmark(self.buffer_id, self.namespace, 0, 0, {
+            virt_text = { { "Activate Neovim.", "Comment" } },
+            virt_text_pos = "overlay",
+            virt_lines = {
+                { { "Go to settings to activate neovim.", "Comment" } },
+            },
+        })
+    end
 end
 
 return {
