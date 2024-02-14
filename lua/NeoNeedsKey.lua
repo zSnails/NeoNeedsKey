@@ -48,7 +48,6 @@ end
 
 ---@return integer, integer
 local function create_window()
-    -- TODO: make the window transparent.
     local buf_id = vim.api.nvim_create_buf(false, true)
     local config = create_window_config()
     local win_id = vim.api.nvim_open_win(buf_id, false, config)
