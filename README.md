@@ -16,9 +16,27 @@ devs!
 * Customizable timeout: Set the time it takes for the message to appear (so you can
   prepare your eye patch!).
 
-## Install it
+## Setup
 
-* Use your fav Neovim plugin manager.
+To setup this plugin just call the setup function.
+
+```lua
+require("NeoNeedsKey").setup()
+```
+
+### Configuration
+
+The setup function accepts a table.
+
+Currently there's only one field `timeout` this is a timeout in seconds.
+
+```lua
+require("NeoNeedsKey").setup {
+    timeout = 10
+}
+```
+
+
 
 Enjoy, ye scallywags! (But seriously, activate!)
 
