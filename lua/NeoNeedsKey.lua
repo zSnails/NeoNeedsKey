@@ -55,6 +55,8 @@ end
 
 function ActivationWindow:open()
     self.buffer, self.window_id = create_window()
+    vim.api.nvim_set_hl(self.namespace, "NormalFloat", { bg = "NONE" })
+    vim.api.nvim_win_set_hl_ns(self.window_id, self.namespace)
     vim.api.nvim_buf_set_extmark(self.buffer, self.namespace, 0, 0, {
         virt_text = { { "Activate Neovim.", "Comment" } },
         virt_lines = {
