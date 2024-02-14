@@ -64,10 +64,17 @@ end
 
 return {
     ActivationWindow = ActivationWindow,
-    setup = function()
+    ---@param opts table
+    setup = function(opts)
         local window = ActivationWindow.new()
+        if opts == nil then
+            opts = {
+                timeout = 10
+            }
+        end
 
         vim.api.nvim_create_user_command("ActivateNeovim", function() window:close() end, {})
         vim.api.nvim_create_user_command("DeactivateNeovim", function() window:open() end, {})
+        vim.defer_fn(function() window:open() end, opts.timeout * 1000)
     end
 }
