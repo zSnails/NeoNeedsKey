@@ -116,25 +116,32 @@ function ActivationWindow:open()
     end
 end
 
+---@param opts table
+local function make_opts(opts)
+    -- TODO: find a better way of doing options
+    if opts == nil then
+        opts = {
+            timeout = 5,
+            position = "bottom-right"
+        }
+    end
+
+    if opts.timeout == nil then
+        opts.timeout = 5
+    end
+
+    if opts.position == nil then
+        opts.position = "bottom-right"
+    end
+
+    return opts
+end
+
 return {
     ActivationWindow = ActivationWindow,
     ---@param opts table
     setup = function(opts)
-        -- TODO: find a better way of doing options
-        if opts == nil then
-            opts = {
-                timeout = 5,
-                position = "bottom-right"
-            }
-        end
-
-        if opts.timeout == nil then
-            opts.timeout = 5
-        end
-
-        if opts.position == nil then
-            opts.position = "bottom-right"
-        end
+        opts = make_opts(opts)
 
         local window = ActivationWindow.new(opts)
         vim.api.nvim_create_autocmd("WinResized", {
