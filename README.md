@@ -32,15 +32,25 @@ require("NeoNeedsKey").setup()
 
 The setup function accepts a table.
 
-Currently there's only one field `timeout` this is a timeout in seconds.
+
+| Field | Type | Default Value(s) |
+|:-:|:-:|:-|
+|timeout|integer|10|
+|position|string|`bottom-right`|
+
+The possible position values are:
+
+- *bottom-right*
+- *bottom-left*
+- *top-right*
+- *top-left*
 
 ```lua
 require("NeoNeedsKey").setup {
     timeout = 10
+    position = "bottom-right"
 }
 ```
-
-
 
 Enjoy, ye scallywags! (But seriously, activate!)
 
