@@ -30,7 +30,7 @@ local positions = {
     ---@return integer
     ---@return integer
     ["top-right"] = function(width, _)
-        return math.max(width, -13, 0), 0
+        return math.max(width - 13, 0), 0
     end,
     ---@param width integer
     ---@param height integer
