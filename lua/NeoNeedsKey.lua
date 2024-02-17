@@ -56,7 +56,10 @@ local positions = {
 ---@param position string
 local function create_window_config(position)
     local ui = vim.api.nvim_list_uis()[1]
-    local col, row = positions[position](ui.width, ui.height)
+    local col, row = 0, 0
+    if ui ~= nil then
+        col, row = positions[position](ui.width, ui.height)
+    end
 
     return {
         relative = "editor",
