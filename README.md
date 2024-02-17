@@ -47,7 +47,7 @@ The possible position values are:
 
 ```lua
 require("NeoNeedsKey").setup {
-    timeout = 10
+    timeout = 10,
     position = "bottom-right"
 }
 ```
