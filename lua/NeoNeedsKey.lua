@@ -140,10 +140,15 @@ local function make_opts(opts)
     return opts
 end
 
+local setup_run = false
+
 return {
     ActivationWindow = ActivationWindow,
     ---@param opts table
     setup = function(opts)
+        if setup_run then
+            return
+        end
         opts = make_opts(opts)
 
         local window = ActivationWindow.new(opts)
@@ -156,5 +161,7 @@ return {
         vim.api.nvim_create_user_command("ActivateNeovim", function() window:close() end, {})
         vim.api.nvim_create_user_command("DeactivateNeovim", function() window:open() end, {})
         vim.defer_fn(function() window:open() end, opts.timeout * 1000)
+
+        setup_run = true
     end
 }
