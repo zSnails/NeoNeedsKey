@@ -78,7 +78,7 @@ end
 
 
 ---@param position string
----@return integer, integer
+---@return integer buf_if, integer win_id
 local function create_window(position)
     local buf_id = vim.api.nvim_create_buf(false, true)
     local config = create_window_config(position)
