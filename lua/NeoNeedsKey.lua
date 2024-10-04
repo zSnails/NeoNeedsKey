@@ -106,7 +106,7 @@ function ActivationWindow:open()
         vim.api.nvim_set_hl(self.namespace, "NormalFloat", { bg = "NONE" })
         vim.api.nvim_set_hl(self.namespace, "FloatBorder", { bg = "NONE" })
         vim.api.nvim_set_hl(self.namespace, "FloatTitle", { bg = "NONE" })
-        vim.api.nvim_win_set_option(self.window_id, "winblend", 100)
+        vim.api.nvim_set_option_value("winblend", 100, { win = self.window_id })
 
         vim.api.nvim_win_set_hl_ns(self.window_id, self.namespace)
         vim.api.nvim_buf_set_extmark(self.buffer_id, self.namespace, 0, 0, {
