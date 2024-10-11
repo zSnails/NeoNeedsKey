@@ -1,7 +1,7 @@
 # NeoNeedsKey: Yo Ho Ho, Activate Your Vim or Walk the Plank!
 
-<a href="https://dotfyle.com/plugins/{owner}/{name}">
-  <img src="https://dotfyle.com/plugins/{owner}/{name}/shield" />
+<a href="https://dotfyle.com/plugins/zSnails/NeoNeedsKey">
+  <img src="https://dotfyle.com/plugins/zSnails/NeoNeedsKey/shield" />
 </a>
 
 ![lua.png](./images/lua.png)
