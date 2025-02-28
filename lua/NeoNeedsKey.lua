@@ -88,7 +88,7 @@ local function create_window(position)
 end
 
 function ActivationWindow:close()
-    if self.window_id ~= nil then
+    if self.window_id ~= nil and vim.api.nvim_win_is_valid(self.window_id) then
         vim.api.nvim_win_close(self.window_id, true)
     end
 
